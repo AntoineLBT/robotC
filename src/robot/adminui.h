@@ -1,4 +1,4 @@
-/* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */  
+/* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
 /**
  * @file  adminUI.h
  *
@@ -30,7 +30,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  */
 
 
@@ -54,12 +54,13 @@ extern void AdminUI_stop();
 
 /**
  * initialize in memory AdminUI
- * 
+ *
  */
 extern void AdminUI_new();
 
+
 /**
- * destruct the AdminUI from memory 
+ * destruct the AdminUI from memory
  *
  */
 extern void AdminUI_free();
@@ -67,4 +68,3 @@ extern void AdminUI_free();
 
 
 #endif /* ADMINUI_H */
-
