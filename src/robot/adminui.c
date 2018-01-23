@@ -9,7 +9,10 @@ void AdminUI_new() {
 }
 
 void AdminUI_start() {
-
+    int i;
+    for (i = 0; i < 10; i++) {
+        printf("%d\n",i);
+    }
 }
 
 void AdminUI_stop() {
