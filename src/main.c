@@ -1,4 +1,4 @@
-/* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */  
+/* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
 /**
  * @file  main.c
  *
@@ -30,7 +30,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  */
 
 #include "./robot/adminui.h"
@@ -42,9 +42,8 @@ int main (int argc, char *argv[])
 {
 
   AdminUI_new();
-  AdminUI_start();
-  AdminUI_stop();
-  AdminUI_free();
+  //AdminUI_start();
+  //AdminUI_stop();
+  //AdminUI_free();
   return 0;
 }
-

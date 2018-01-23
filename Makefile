@@ -1,15 +1,15 @@
 #
 # Hello Robot C - Makefile principal.
-# 
+#
 # @author Matthias Brun
 #
 
 # Répertoire d'installation de la librairie Infox
-# pour la compilation avec le simulateur Intox 
+# pour la compilation avec le simulateur Intox
 # TODO (à adapter) :
 # INTOXDIR = $(realpath /<path>/<to>/infox_prose-<arch>-v0.3
 # Exemple :
-INTOXDIR = $(realpath ../infox_prose-x86_64-v0.3/)
+INTOXDIR = /home/antoine/github/infox_prose-x86_64-v0.3/
 
 
 # Organisation des sources.
@@ -29,7 +29,7 @@ SUBDIRS = $(SRCDIR)
 export CC = gcc
 
 # options de compilation
-export CCFLAGS += -O0 
+export CCFLAGS += -O0
 export CCFLAGS += -DNDEBUG # avec debuggage : -g -DDEBUG # sans debuggage : -DNDEBUG
 export CCFLAGS += -MMD -MP # gestion automatique des dépendances
 export CCFLAGS += -D_BSD_SOURCE -D_XOPEN_SOURCE_EXTENDED -D_XOPEN_SOURCE -D_DEFAULT_SOURCE -D_GNU_SOURCE
@@ -51,7 +51,7 @@ export PROG = $(BINDIR)/robot_pc
 #
 
 # Compilation.
-all: 
+all:
 	@for i in $(SUBDIRS); do (cd $$i; make $@); done
 
 # Nettoyage.
@@ -60,4 +60,3 @@ all:
 clean:
 	@for i in $(SUBDIRS); do (cd $$i; make $@); done
 	@rm -f $(PROG) core* $(BINDIR)/core*
-

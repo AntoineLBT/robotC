@@ -1,0 +1,1 @@
+adminui.o: adminui.c
