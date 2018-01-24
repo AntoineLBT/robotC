@@ -42,7 +42,7 @@ int main (int argc, char *argv[])
 {
 
   AdminUI_new();
-  //AdminUI_start();
+  AdminUI_start();
   //AdminUI_stop();
   //AdminUI_free();
   return 0;
