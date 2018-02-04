@@ -13,3 +13,12 @@ void Pilot_setVelocity();
 void Pilot_check();
 void Pilot_checkMAE();
 PilotState Pilot_getState();
+
+
+void Pilot_new(){
+
+}
+
+void Pilot_start(){
+    
+}
