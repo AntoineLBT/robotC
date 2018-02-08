@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <termios.h>
 #include <unistd.h>
+#include "pilot.h"
 
 #define PRINTMENU printf("z : avancer\ns : reculer\nq : gauche\nd : droite\n  : s'arrêter\na : log\ne : effacer log\nx : quitter\n");
 
@@ -17,47 +18,23 @@ char captureChoice();
 void AdminUI_new() {
     printf("Programme robot V1 : CTRL+C pour quitter\n");
     PRINTMENU;
+    Pilot_new();
 }
 
 void AdminUI_start() {
     char userChoice = ' ';
     while(userChoice != 'x'){
         userChoice = captureChoice();
-        switch (userChoice) {
-            case 'z':
-                printf("avancer\n");
-                break;
-            case 's':
-                printf("reculer\n");
-                break;
-            case 'q':
-                printf("gauche\n");
-                break;
-            case 'd':
-                printf("droite\n");
-                break;
-            case 'a':
-                printf("asklog()\n");
-                break;
-            case 'e':
-                printf("clearlog()\n");
-                break;
-            case 'x':
-                printf("quitter\n");
-                break;
-            default:
-                printf("touche non reconnu\n");
-                break;
-        }
     }
+    Pilot_start();
 }
 
 void AdminUI_stop() {
-
+    Pilot_stop();
 }
 
 void AdminUI_free() {
-
+    Pilot_free();
 }
 
 char captureChoice(){
@@ -88,6 +65,32 @@ char captureChoice(){
 
     /*restore the old settings*/
     tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
+    switch (c) {
+        case 'z':
+            printf("avancer\n");
+            break;
+        case 's':
+            printf("reculer\n");
+            break;
+        case 'q':
+            printf("gauche\n");
+            break;
+        case 'd':
+            printf("droite\n");
+            break;
+        case 'a':
+            printf("asklog()\n");
+            break;
+        case 'e':
+            printf("clearlog()\n");
+            break;
+        case 'x':
+            printf("quitter\n");
+            break;
+        default:
+            printf("touche non reconnu\n");
+            break;
+    }
 
     return c;
 }

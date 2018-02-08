@@ -48,6 +48,8 @@ typedef struct
     float luminosity;
 } SensorState;
 
+
+SensorState *SensorState_init(void);
 /**
  * Start the Robot (initialize communication and open port)
 

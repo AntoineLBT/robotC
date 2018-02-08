@@ -30,14 +30,14 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  */
 
 #ifndef PILOT_H
 #define PILOT_H
 
 typedef enum {LEFT=0, RIGHT, FORWARD, BACKWARD} Direction;
-    
+
 typedef struct
 {
     Direction dir;
@@ -72,40 +72,39 @@ extern void Pilot_new();
 
 
 /**
- * destruct the object Pilot from memory 
+ * destruct the object Pilot from memory
  */
 extern void Pilot_free();
 
 /**
  * setVelocity
- * 
- * @brief description 
- * @param vel 
+ *
+ * @brief description
+ * @param vel
  */
 extern void Pilot_setVelocity(VelocityVector vel);
 
 /**
  * getState
- * 
- * @brief description 
+ *
+ * @brief description
  * @return PilotState
  */
 extern PilotState Pilot_getState();
 
 /**
  * check
- * 
- * @brief description 
+ *
+ * @brief description
  */
 extern void Pilot_check();
 
 /**
  * checkMAE
- * 
- * @brief description 
+ *
+ * @brief description
  */
 extern void Pilot_checkMAE();
 
 
 #endif /* PILOT_H */
-

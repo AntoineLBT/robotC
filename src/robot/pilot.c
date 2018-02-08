@@ -3,22 +3,37 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "pilot.h"
+#include "robot.h"
 
-
-void Pilot_free();
-void Pilot_start();
-void Pilot_new();
-void Pilot_stop();
-void Pilot_setVelocity();
-void Pilot_check();
-void Pilot_checkMAE();
-PilotState Pilot_getState();
-
+//static void sendMvt(VelocityVector);
+PilotState p1;
 
 void Pilot_new(){
-
+    Robot_new();
 }
 
 void Pilot_start(){
-    
+    Robot_start();
 }
+
+void Pilot_stop(){
+    Robot_stop();
+}
+
+void Pilot_free(){
+    Robot_free();
+}
+
+void Pilot_setVelocity(VelocityVector vel){
+
+}
+PilotState Pilot_getState(){
+    return p1;
+}
+void Pilot_check(){
+
+}
+
+/*static void sendMvt(VelocityVector){
+    printf("\n");
+}*/
