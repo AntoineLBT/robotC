@@ -1,4 +1,4 @@
-/* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */  
+/* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
 /**
  * @file  pilot.h
  *
@@ -35,6 +35,13 @@
 
 #ifndef PILOT_H
 #define PILOT_H
+
+#define NB_ETAT 2
+#define NB_ENTREE
+
+typedef enum {Idle=0,Running, pseudoEtat1, pseudoEtat2, pseudoEtat3} Etat;
+typedef enum {setVelocity=0, hasBumped} Entree;
+typedef enum {vel=0, sendMvt, bump} Action;
 
 typedef enum {LEFT=0, RIGHT, FORWARD, BACKWARD} Direction;
 

@@ -37,3 +37,5 @@ void Pilot_check(){
 /*static void sendMvt(VelocityVector){
     printf("\n");
 }*/
+
+static Etat tableEtat [NB_ETAT][NB_ENTREE]={{}}

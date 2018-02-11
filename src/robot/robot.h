@@ -32,7 +32,7 @@
  * THE SOFTWARE.
  *
  */
-
+#include "prose.h"
 
 #ifndef ROBOT_H
 #define ROBOT_H
@@ -48,6 +48,10 @@ typedef struct
     float luminosity;
 } SensorState;
 
+typedef struct {
+    Motor * mD;
+    Motor * mG;
+};
 /**
  * Start the Robot (initialize communication and open port)
 
