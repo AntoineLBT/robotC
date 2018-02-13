@@ -38,4 +38,39 @@ void Pilot_check(){
     printf("\n");
 }*/
 
-static Etat tableEtat [NB_ETAT][NB_ENTREE]={{}}
+static void Pilot_run(Event anEvent){
+    TransitionAction anAction;
+    State aState;
+    anAction = mySm[myState][anEvent].action;
+    aState = mySm[myState][anEvent].destinationState;
+    if(aState != S_FORGET){
+        Pilot_performAction(anAction);
+        myState = aState;
+    }
+}
+
+static void Pilot_performAction(TransitionAction anAction){
+    switch(anAction){
+        case A_NOP:
+            break;
+        case A_HAS_BUMPED:
+            has_bumped();
+            break;
+        case A_MVT:
+            sendMvt(vel);
+            break;
+        case A_NOT_MVT:
+            not_sendMvt(vel);
+            break;
+        case A_SET_VELOCITY:
+            Pilot_setVelocity(vel);
+            break;
+        case A_STOP:
+            Pilot_stop();
+            Pilot_free();
+            break;
+        default:
+            printf("Action inconnue\n");
+            break;
+    }
+}

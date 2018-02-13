@@ -48,10 +48,11 @@ typedef struct
     float luminosity;
 } SensorState;
 
-typedef struct {
+/*typedef struct {
     Motor * mD;
     Motor * mG;
-};
+};*/
+
 /**
  * Start the Robot (initialize communication and open port)
 

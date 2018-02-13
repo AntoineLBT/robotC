@@ -39,11 +39,12 @@
 #define NB_ETAT 2
 #define NB_ENTREE
 
-typedef enum {Idle=0,Running, pseudoEtat1, pseudoEtat2, pseudoEtat3} Etat;
+/*typedef enum {Idle=0,Running, pseudoEtat1, pseudoEtat2, pseudoEtat3} Etat;
 typedef enum {setVelocity=0, hasBumped} Entree;
 typedef enum {vel=0, sendMvt, bump} Action;
-
+*/
 typedef enum {LEFT=0, RIGHT, FORWARD, BACKWARD} Direction;
+
 
 typedef struct
 {
@@ -58,6 +59,52 @@ typedef struct
     float luminosity;
 } PilotState;
 
+typedef enum{
+    S_FORGET = 0,
+    S_IDLE,
+    S_RUNNING,
+    S_P_E_1,
+    S_P_E_2, 
+    S_DEATH,
+    NB_STATE
+} State;
+
+typedef enum {
+    A_NOP = 0,
+    A_SET_VELOCITY,
+    A_MVT, 
+    A_NOT_MVT,
+    A_HAS_BUMPED,
+    A_STOP
+} TransitionAction;
+
+typedef enum {
+    E_CHEKC_VEL = 0,
+    E_CHECK_VEL_FALSE,
+    E_ELSE,
+    E_CHECK_BUMP_FALSE,
+    E_CHECK_BUMP_TRUE,
+    E_STOP, 
+    NB_EVENT
+} Event;
+
+typedef struct {
+    State destinationState;
+    TransitionAction action;
+} Transition;
+
+static Transition mySm [NB_STATE][NB_EVENT]={
+    [S_IDLE][E_CHEKC_VEL] = {S_P_E_1, A_SET_VELOCITY},
+    [S_P_E_1][E_CHECK_VEL_FALSE] = {S_IDLE, A_NOT_MVT},
+    [S_P_E_1][E_ELSE] = {S_RUNNING, A_MVT},
+    [S_RUNNING][E_CHEKC_VEL] = {S_P_E_2, A_HAS_BUMPED},
+    [S_P_E_2][E_CHECK_BUMP_FALSE] = {S_RUNNING, A_NOP},
+    [S_P_E_2][E_CHECK_BUMP_TRUE] = {S_IDLE, A_NOT_MVT},
+    [S_IDLE][E_STOP] = {S_DEATH, A_STOP},
+    [S_RUNNING][E_STOP] = {S_DEATH, A_STOP}
+};
+
+State myState = S_DEATH;
 /**
  * Start Pilot
  *
