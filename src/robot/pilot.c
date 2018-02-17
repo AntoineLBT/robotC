@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "pilot.h"
-#include "robot.h"
+#include "/home/antoine/github/robotC/src/robot/robot.h"
 
 //static void sendMvt(VelocityVector);
 PilotState p1;
@@ -24,8 +24,11 @@ void Pilot_free(){
     Robot_free();
 }
 
-void Pilot_setVelocity(VelocityVector vel){
-
+static VelocityVector vel
+void Pilot_setVelocity(VelocityVector velocity){
+    vel.dir = velocity.dir;
+    vel.power = velocity.power;
+    Pilot_run(E_CHECK_VEL);
 }
 PilotState Pilot_getState(){
     return p1;
@@ -34,9 +37,17 @@ void Pilot_check(){
 
 }
 
-/*static void sendMvt(VelocityVector){
-    printf("\n");
-}*/
+void Pilot_check_vel(){
+    if(vel.power==0){
+        Pilot_run(E_VELZERO);
+    } else {
+        Pilot_run(E_VELNONZERO);
+    }
+}
+
+static void Pilot_sendMvt(){
+    
+}
 
 static void Pilot_run(Event anEvent){
     TransitionAction anAction;
@@ -44,8 +55,8 @@ static void Pilot_run(Event anEvent){
     anAction = mySm[myState][anEvent].action;
     aState = mySm[myState][anEvent].destinationState;
     if(aState != S_FORGET){
-        Pilot_performAction(anAction);
         myState = aState;
+        Pilot_performAction(anAction);
     }
 }
 

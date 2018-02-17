@@ -32,7 +32,7 @@
  * THE SOFTWARE.
  *
  */
-#include "prose.h"
+#include "/home/antoine/github/infox_prose-x86_64-v0.3/include/infox/prose/prose.h"
 
 #ifndef ROBOT_H
 #define ROBOT_H
@@ -48,10 +48,12 @@ typedef struct
     float luminosity;
 } SensorState;
 
-/*typedef struct {
+typedef struct {
     Motor * mD;
     Motor * mG;
-};*/
+    ContactSensor * contact_sensor:
+    LightSensor * light_sensor;
+} Robot;
 
 /**
  * Start the Robot (initialize communication and open port)
@@ -100,6 +102,16 @@ extern SensorState Robot_getSensorState();
  * @param int mr : right's wheel power, value between -10O and 100
  * @param int ml : left's wheel power, value between -100 and 100
  */
-extern void Robot_setWheelsVelocity(int mr,int ml);
+extern void Robot_setWheelsVelocity(Robot * robot, int mr,int ml);
 
 #endif /* ROBOT_H */
+
+/**
+ * Robot constructor 
+*/
+Robot * robot();
+
+/**
+ * Robot destructor
+*/
+extern void Robot_destructor(Robot * robot);
