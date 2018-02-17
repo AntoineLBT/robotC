@@ -65,6 +65,9 @@ extern void AdminUI_new();
  */
 extern void AdminUI_free();
 
-
+/**
+ * capture the choice of the user 
+*/
+ 
 
 #endif /* ADMINUI_H */
