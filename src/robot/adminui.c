@@ -5,15 +5,16 @@
 #include <ctype.h>
 #include <termios.h>
 #include <unistd.h>
-#include "pilot.h"
+#include "adminui.h"
 
 #define PRINTMENU printf("z : avancer\ns : reculer\nq : gauche\nd : droite\n  : s'arrêter\na : log\ne : effacer log\nx : quitter\n");
 
-void AdminUI_new();
-void AdminUI_start();
-void AdminUI_stop();
-void AdminUI_free();
-char captureChoice();
+
+static char captureChoice();
+static void askMvt(Direction dir);
+static void ask4Log();
+static void askClearLog();
+static void quit();
 
 void AdminUI_new() {
     printf("Programme robot V1 : CTRL+C pour quitter\n");
@@ -22,6 +23,7 @@ void AdminUI_new() {
 }
 
 void AdminUI_start() {
+    
     char userChoice = ' ';
     while(userChoice != 'x'){
         userChoice = captureChoice();
@@ -30,14 +32,14 @@ void AdminUI_start() {
 }
 
 void AdminUI_stop() {
-    Pilot_stop();
+    //Pilot_stop();
 }
 
 void AdminUI_free() {
-    Pilot_free();
+    //Pilot_free();
 }
 
-char captureChoice(){
+static char captureChoice(){
     char c;
     static struct termios oldt, newt;
 
@@ -56,10 +58,7 @@ char captureChoice(){
     TCSANOW tells tcsetattr to change attributes immediately. */
     tcsetattr( STDIN_FILENO, TCSANOW, &newt);
 
-    /*This is your part:
-    I choose 'e' to end input. Notice that EOF is also turned off
-    in the non-canonical mode*/
-    //while((c=getchar())!= '')
+    //This is your part:
         c = getchar();
         putchar(c);
 
@@ -67,25 +66,25 @@ char captureChoice(){
     tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
     switch (c) {
         case 'z':
-            printf("avancer\n");
+            askMvt(FORWARD);
             break;
         case 's':
-            printf("reculer\n");
+            askMvt(BACKWARD);
             break;
         case 'q':
-            printf("gauche\n");
+            askMvt(LEFT);
             break;
         case 'd':
-            printf("droite\n");
+            askMvt(RIGHT);
             break;
         case 'a':
-            printf("asklog()\n");
+            ask4Log();
             break;
         case 'e':
-            printf("clearlog()\n");
+            askClearLog();
             break;
         case 'x':
-            printf("quitter\n");
+            quit();
             break;
         default:
             printf("touche non reconnu\n");
@@ -94,3 +93,48 @@ char captureChoice(){
 
     return c;
 }
+static VelocityVector vel;
+
+static void askMvt(Direction dir){
+    switch(dir){
+        case FORWARD:
+            vel.dir = FORWARD;
+            if(vel.power == 100){
+                vel.power = 100;
+            } else {
+                vel.power += 5;
+            }
+            break;
+        case BACKWARD:
+            vel.dir = BACKWARD;
+            if(vel.power == -100){
+                vel.power = -100;
+            } else {
+                vel.power -= 5;
+            }
+            break;
+        case LEFT:
+            vel.dir = LEFT;
+            break;
+        case RIGHT: 
+            vel.dir = RIGHT;
+            break;
+        default:
+            break;
+    }
+    printf("power : %d", vel.power);
+}
+
+static void ask4Log(){
+    PRINTMENU;
+}
+
+static void askClearLog(){
+
+}
+
+static void quit(){
+    printf("Au revoir");
+}
+
+

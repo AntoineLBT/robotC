@@ -37,6 +37,7 @@
 #ifndef ADMINUI_H
 #define ADMINUI_H
 
+#include "pilot.h"
 
 /**
  * Start AdminUI and waits for the user's input until the user ask to quit
@@ -65,9 +66,5 @@ extern void AdminUI_new();
  */
 extern void AdminUI_free();
 
-/**
- * capture the choice of the user 
-*/
- 
 
 #endif /* ADMINUI_H */
