@@ -11,3 +11,31 @@
 #define FLOOR_SENSOR S2
 
 // a completer
+
+void Robot_start(){
+
+}
+
+void Robot_stop(){
+
+}
+
+void Robot_new(){
+
+}
+
+void Robot_free(){
+
+}
+
+int Robot_getRobotSpeed(){
+    return 0;
+}
+static SensorState s1;
+SensorState Robot_getSensorState(){
+    return s1;
+}
+
+void Robot_setWheelsVelocity(int mr, int ml){
+
+}

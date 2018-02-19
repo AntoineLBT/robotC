@@ -1,5 +1,3 @@
-../bin/robot_pc: main.c robot/adminui.h robot/pilot.h
+../bin/robot_pc: main.c robot/adminui.h
 
 robot/adminui.h:
-
-robot/pilot.h:

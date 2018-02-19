@@ -6,6 +6,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include "adminui.h"
+#include "pilot.h"
 
 #define PRINTMENU printf("z : avancer\ns : reculer\nq : gauche\nd : droite\n  : s'arrêter\na : log\ne : effacer log\nx : quitter\n");
 
@@ -15,20 +16,21 @@ static void askMvt(Direction dir);
 static void ask4Log();
 static void askClearLog();
 static void quit();
+static void eraseLog();
+static void display();
 
 void AdminUI_new() {
     printf("Programme robot V1 : CTRL+C pour quitter\n");
-    PRINTMENU;
     Pilot_new();
 }
 
 void AdminUI_start() {
-    
+    Pilot_start();
     char userChoice = ' ';
     while(userChoice != 'x'){
+        display();
         userChoice = captureChoice();
     }
-    Pilot_start();
 }
 
 void AdminUI_stop() {
@@ -122,19 +124,28 @@ static void askMvt(Direction dir){
         default:
             break;
     }
-    printf("power : %d", vel.power);
+    printf("power : %d\n", vel.power);
+    Pilot_setVelocity(vel);
 }
 
 static void ask4Log(){
-    PRINTMENU;
+    Pilot_check();
 }
 
 static void askClearLog(){
-
+    eraseLog();
 }
 
 static void quit(){
     printf("Au revoir");
+    Pilot_stop();
 }
 
+static void eraseLog(){
+    printf("erase log");
+}
+
+static void display(){
+    PRINTMENU;
+}
 
