@@ -34,11 +34,11 @@ void AdminUI_start() {
 }
 
 void AdminUI_stop() {
-    //Pilot_stop();
+    Pilot_stop();
 }
 
 void AdminUI_free() {
-    //Pilot_free();
+    Pilot_free();
 }
 
 static char captureChoice(){
